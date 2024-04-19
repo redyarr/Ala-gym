@@ -1,4 +1,5 @@
 const Products = require('../models/products');
+const purchase = require('../models/purchase');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('add-products')
@@ -75,6 +76,11 @@ exports.postDecreaseProductQuantity = (req, res, next) => {
 
 exports.DeleteProduct = (req, res, next) => {
     const prodId = req.params.id;
+    purchase.updateMany({ product: prodId }, { $set: { product: null } }, function(err) {
+        if (err) {
+          console.log(err);
+        }});
+
     Products.findById(prodId).then(product => {
         product.deleteOne().then(() => {
             res.redirect('/products');

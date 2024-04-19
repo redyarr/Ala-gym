@@ -49,6 +49,10 @@ exports.getCustomer = async (req, res) => {
 
 exports.DeleteCustomer = (req, res, next) => {
     const CusId = req.params.id;
+    Purchase.updateMany({ customer: CusId }, { $set: { customer: null } }, function(err) {
+        if (err) {
+          console.log(err);
+        }});
     Customers.findById(CusId).then(Customer => {
         Customer.deleteOne().then(() => {
             res.redirect('/customers');
