@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="/css/form.css" />
+</head>
+
+<body>
+    <header>
+        <%-include('./includes/nav.ejs')%>
+    </header>
+<section>
+    <div class="container">
+        
+<form action="/add-products" method="POST">
+    <div class="infield">
+        <input type="text" id="name" name="name" required />
+        <label class="label-main" for="name">Product Name</label>
+        <label class="label1"></label>
+    </div>
+    <div class="infield">
+        <input type="number" id="price" name="price" required />
+        <label class="label-main" for="price">Price</label>
+        <label class="label1"></label>
+    </div>
+    <div class="infield">
+        <input type="text" id="image" name="image" required />
+        <label class="label-main" for="image">Image URL</label>
+        <label class="label1"></label>
+    </div>
+    <div class="infield">
+        <input type="number" id="quantity" name="quantity" required />
+        <label class="label-main" for="quantity">Quantity</label>
+        <label class="label1"></label>
+    </div>
+    <input class="submit-button" type="submit" value="Submit" />
+</form>
+    </div>
+</section>
+
+<br />
+<br />
+<br /><br />
+<br />
+<br />  
+

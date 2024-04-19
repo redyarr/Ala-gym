@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+
+    <link rel="stylesheet" href="/css/form.css" />
+</head>
+
+<body>
+    <header>
+        <%-include('./includes/nav.ejs')%>
+    </header>
+<section>
+    <div class="container">
+
+<form action="/add-customer" method="POST">
+    <div class="infield">
+        <input type="text" id="Fname" name="Fname" required />
+        <label class="label-main" for="Fname">First Name</label>
+        <label class="label1"></label>
+    </div>
+    <div class="infield">
+        <input type="text" id="Lname" name="Lname" required />
+        <label class="label-main" for="Lname">Last Name</label>
+        <label class="label1"></label>
+    </div>
+    <div class="infield">
+        <input type="number" id="age" name="age" required />
+        <label class="label-main" for="age">Age</label>
+        <label class="label1"></label>
+    </div>
+    <div class="infield">
+        <input type="text" id="image" name="image" />
+        <label class="label-main" for="image">Image URL</label>
+        <label class="label1"></label>
+    </div>
+    <input class="submit-button" type="submit" value="Submit" />
+</form>
+
+
+</section>
+
+<br />
+<br />
+<br /><br />
+<br />
+<br />  

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>main</title>
+</head>
+<body>
+  <%-include('./includes/nav.ejs')%>
+<br>
+<main >
+
+  <div class="nav-spacer"></div>
+  
+  <div class="container">
+<%for(let product of products){%>
+
+
+<div class="card">
+  <div class="card-img"><div class="img" style="background-image: url(<%=product.image%>)"></div></div>
+  <div class="card-title"><%=product.name%></div>
+
+  <hr class="card-divider">
+
+      <div class="card-price"><span class="price">$<%=product.price%></span>  <span> : نرخ</span></div>  
+  <div class="card-footer">  
+    <div class="card-subtitle"><span class="quan"><%=product.quantity%></span><span >  : چەندینە  </span></div>
+  </div>
+
+  <!-- increase button -->
+  <button class="change-quantity-button">Add</button>
+  <form action="/increase-product-quantity" method="POST" class="change-quantity-form" style="display: none;">
+    <input type="number" name="increaseAmount" min="1" id="add-input" class="reduce">
+    <input type="hidden" name="productId" value="<%= product._id %>">
+    <button type="submit" class="butt">Add</button>
+</form>
+<!-- decrease button  -->
+    <button class="change-quantity-button">Decrease</button>
+    <form action="/decrease-product-quantity" method="POST" class="change-quantity-form" style="display: none;" onsubmit="return validateDecrease(this);">
+      <input type="number" name="decreaseAmount" min="1" id="decrease-input" class="reduce" >
+      <input type="hidden" name="productId" value="<%= product._id %>">
+      <button type="submit" class="butt"style="background-color: rgb(255, 118, 118);">Decrease</button>
+    </form>
+
+  
+<!-- delete button -->
+
+<form action="/delete-product/<%=product._id%>?_method=DELETE" method="POST" class="delete-product-button">
+  <input type="hidden" name="productId" value="<%= product._id %>">
+  <button type="submit" >Delete</button>
+</form>
+
+
+</div>
+
+
+  <%}%>
+</div>
+</main>
+</body>
+
+<script>
+
+document.querySelectorAll('.change-quantity-button').forEach(button => {
+  button.addEventListener('click', function() {
+    // Hide all forms
+    document.querySelectorAll('.change-quantity-form').forEach(form => {
+      form.style.display = 'none';
+    });
+
+    // Show the form associated with the clicked button
+    const form = this.nextElementSibling;
+    form.style.display = 'block';
+  });
+});
+
+function validateDecrease(form) {
+  const decreaseAmount = parseInt(form.decreaseAmount.value);
+  const productQuantity = parseInt(form.parentElement.querySelector('.quan').textContent.trim().replace(/\D/g, ''));
+  if (decreaseAmount > productQuantity) {
+    alert('You cannot decrease the quantity by more than the current quantity.');
+    return false;
+  }
+  return true;
+}
+
+</script>
+
+</html>

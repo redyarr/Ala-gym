@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>main</title>
+</head>
+<body>
+  <%-include('./includes/nav.ejs')%>
+<br>
+<main >
+  <div id="edit-buttons">
+    <button class="edit-button" onclick="window.location.href='?edit=true'">Edit Mode</button>
+    <button class="edit-button" onclick="window.location.href='?edit=false'">View Mode</button>
+  </div>
+  <div class="container">
+<%for(let customer of customers){%>
+  <a href="/customer/<%=customer._id%>">
+<div class="card">
+  <div class="card-img"><div class="img" style="background-image: url(<%=customer.image%>)"></div></div>
+  <div class="card-title" style="font-size: 30px; color: black;"><%=customer.Fname%> <%=customer.Lname%></div>
+  <hr class="card-divider">
+  <div class="card-subtitle" style="display: block; margin-top: 20px;">Age: <%=customer.age%></div>
+  <div class="card-subtitle" style="display: block; margin-top: 20px;  font-size: 20;">joined: <%=new Date(customer.startDate).toISOString().split('T')[0]%>
+  
+    <%if(editMode=='true'){%>
+<form action="/delete-customer/<%=customer._id%>?_method=DELETE" method="POST" class="delete-product-button" style="margin-top: 20px; margin-right: 50px;">
+  <input type="hidden" name="productId" value="<%= customer._id %>">
+  <button type="submit" >Delete</button>
+</form>
+<%}%>
+  </div>
+</div>
+</a>
+<%}%>
+</div>
+</main>
+</body>
+</html>
+
+
+
+
+
+<script>
+
+
+</script>

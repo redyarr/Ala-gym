@@ -1,0 +1,51 @@
+
+
+<head>
+    <link rel="stylesheet" href="/css/customer-one.css">
+</head>
+
+<body>
+    <%-include('./includes/nav.ejs')%>
+
+    <div class="container mt-5">
+        <div class="card shadow-lg mb-5">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="<%= customer.image %>" class="card-img" alt="Customer Image">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title"><%= customer.Fname %> <%= customer.Lname %></h3>
+                        <p class="card-text"><big class="text-muted">Age: <%= customer.age %></big></p>
+                        <p class="card-text"><big class="text-muted">Joined on: <%= new Date(customer.startDate).toISOString().split('T')[0] %></big></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3 class="mb-0">Purchases</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% purchases.forEach(function(purchase) { %>
+                            <tr>
+                                <td><%= purchase.product.name %></td>
+                                <td><%= purchase.quantity %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/customer-one.css">
+  
+</head>
+<body>
+ <%-include('./includes/nav.ejs')%>
+
+    <div class="container mt-5">
+        <div class="summary">
+            <div class="total-purchases">
+                <label>Total purchases:</label>
+                <p><%= purchases.length %></p>
+            </div>
+            <div class="total-money">
+                <label>Total Money:</label>
+                <p><%=total%>$</p>
+            </div>
+            <div class="date-filter">
+                <form action="/filter-purchases" method="POST">
+                    <label for="date">Filter by date:</label>
+                    <input type="date" id="date" name="date" required>
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+        </div>
+    
+        <div class="box">
+            <!-- <p class="TPurchase">Total purchases: <%= purchases.length %></p>
+            <p class="TotalMoney" style="display: inline-block; text-align: end;  margin-left: 1300px; background-color: aliceblue; font-weight: bold;  font-size: xx-large;     ">Total Money: <%=total%>$</p> -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Quantity</th> 
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% purchases.forEach(function(purchase) { %>
+                        <tr>
+                            <td><%= purchase.customer.Fname %> <%= purchase.customer.Lname %></td>
+                            <td><%= purchase.product.name%></td>
+                            <td><%= purchase.quantity %></td>
+                            <td><%= purchase.product.price * purchase.quantity %>$</td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js">
+    </script>
+</body>
+</html>
