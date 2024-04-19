@@ -41,10 +41,10 @@
                 <tbody>
                     <% purchases.forEach(function(purchase) { %>
                         <tr>
-                            <td><%= purchase.customer.Fname %> <%= purchase.customer.Lname %></td>
-                            <td><%=  purchase.product ? purchase.product.name : 'Product not found'%></td>
+                            <td><%= purchase.customer ?purchase.customer.Fname: 'customer was deleted' %> <%= purchase.customer ?purchase.customer.Lname: "!"  %></td>
+                            <td><%=  purchase.product ? purchase.product.name : 'Product has been deleted'%></td>
                             <td><%= purchase.quantity %></td>
-                            <td><%= purchase.product ? (purchase.product.price * purchase.quantity + '$') : 'Product not available' %></td>
+                            <td><%= purchase.product ? (purchase.product.price * purchase.quantity + '$') : 'price not available' %></td>
                         </tr>
                     <% }); %>
                 </tbody>

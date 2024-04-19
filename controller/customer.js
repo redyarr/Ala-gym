@@ -47,20 +47,34 @@ exports.getCustomer = async (req, res) => {
     res.render('customer-one', { customer: customer, purchases: purchases });
 };
 
-exports.DeleteCustomer = (req, res, next) => {
+exports.DeleteCustomer =async (req, res, next) => {
     const CusId = req.params.id;
-    Purchase.updateMany({ customer: CusId }, { $set: { customer: null } }, function(err) {
-        if (err) {
-          console.log(err);
-        }});
-    Customers.findById(CusId).then(Customer => {
-        Customer.deleteOne().then(() => {
-            res.redirect('/customers');
-        }).catch(err => {
-            console.log(err);
-        });
-    }).catch(err => {
+    try {
+        await Purchase.updateMany({ customer: CusId }, { $set: { customer: null } });
+        const Customer = await Customers.findById(CusId);
+        await Customer.deleteOne();
+        res.redirect('/customers');
+    } catch (err) {
         console.log(err);
     }
-    )
+    
 }
+
+
+
+
+// Purchase.updateMany({ customer: CusId }, { $set: { customer: null } }, function(err) {
+    //     if (err) { 
+    //         console.log("customer update err");
+    //       console.log(err);
+    //     }});
+    // Customers.findById(CusId).then(Customer => {
+    //     Customer.deleteOne().then(() => {
+    //         res.redirect('/customers');
+    //     }).catch(err => {
+    //         console.log(err);
+    //     });
+    // }).catch(err => {
+    //     console.log(err);
+    // }
+    // )
