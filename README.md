@@ -8,7 +8,8 @@ Features
 3) Sales Management: Record and manage sales transactions efficiently.
 4) User Authentication: Secure login functionality for accessing the management system.
 
-**Technologies Used**
+**Technologies Used** : 
+
 Frontend: HTML, CSS, JavaScript
 
 Backend: Node.js, Express, mongoose
